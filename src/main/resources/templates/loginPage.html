@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<div id="login-form-wrapper">
+    <aside>
+        <figure>
+            <a href="index"> Asmoderos </a>
+        </figure>
+        <form action="/authenticate" method="post">
+            <div class="login-form">
+                        <span class="input">
+                        <input class="input_field" type="email" th:field="*{userModel.email}" autocomplete="off"
+                               placeholder="Your email">
+                            <label class="input_label"></label>
+                        </span>
 
+                <span class="input">
+                        <input class="input_field" type="password" placeholder="Your password" name="password" id="pass"
+                               th:field="*{userModel.password}">
+                            <label class="input_label"></label>
+                        </span>
+                <small><a href="login.html#0">Forgot password?</a></small>
+            </div>
+            <input type="submit" class="button-box btn_1 rounded full-width add_top_60 bb" value="Login to Asmoderos">
+            <div class="text-center add_	top_10">New to Asmoderos? <strong><a href="register">Sign
+                up!</a></strong></div>
+        </form>
+        <div class="copy">© 2020 Asmoderos</div>
+    </aside>
+</div>
 </body>
 </html>

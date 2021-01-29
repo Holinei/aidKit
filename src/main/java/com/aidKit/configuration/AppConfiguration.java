@@ -1,6 +1,12 @@
 package com.aidKit.configuration;
 
 import com.aidKit.SessionObject;
+import com.aidKit.dao.IUserDAO;
+import com.aidKit.dao.impl.UserDAOImpl;
+import com.aidKit.services.IAuthenticationService;
+import com.aidKit.services.impl.AuthenticationServiceImpl;
+import com.aidKit.services.impl.UserServiceImpl;
+import com.aidKit.services.IUserService;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,4 +25,18 @@ public class AppConfiguration {
     public SessionObject sessionObject() {
         return new SessionObject();
     }
+
+    @Bean
+    public IAuthenticationService authenticationService(IUserDAO userDAO) {
+        return new AuthenticationServiceImpl(userDAO);
+    }
+    @Bean
+    public IUserDAO userDAO(SessionFactory hibernateSessionFactory) {
+        return new UserDAOImpl(hibernateSessionFactory);
+    }
+    @Bean
+    public IUserService userService(IUserDAO userDAO) {
+        return new UserServiceImpl(userDAO);
+    }
+
 }
