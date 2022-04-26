@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar fixed-top navbar-expand-lg navbar-light ">
+    <div class="container">
+        <a href="/aidkit" class="navbar-brand">AidKit</a>
+        <div class="d-flex">
+            <a href="logout"> <button class="btn btn-outline-success ">Log out </button></a>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2">
+                <li class="nav-item">
+                    <a href="showMyAidKit" class="nav-link">MyAidKit</a>
+                </li>
+                <li class="nav-item">
+                    <a href="search" class="nav-link">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Home</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<h1>Znajdź produkt leczniczy</h1>
+<div class="container search">
+    <div class="row ">
+        <div class="col-md-4 my-2">
+            <div class="searchlist">
+                <div id="myDropdown" class="dropdown-content" th:field="${medicineList}">
+                    <input type="text" placeholder="Search.." id="myInput" oninput="filterFunction()">
+                    <div th:each="medicineListDB: ${medicineList}">
+                        <a th:value="${medicineListDB.getMedicineName()}"
+                           th:onclick="'document.getElementById(\'formForMedicinePost' + ${medicineListDB.getMedicineId()} + '\').submit(); return false;'"
+                           th:text="${medicineListDB.getMedicineName()}"></a>
+                        <div class="preview"><span>
+            <form th:id="'formForMedicinePost' + ${medicineListDB.getMedicineId()}"
+                  th:action="@{/aboutMedicine(id=${medicineListDB.getMedicineId()})}" method="POST">
+            </form>
+                 </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container about my-5">
+        <div class="row">
+            <h1 th:text="${medicine.getMedicineName()}"></h1>
+            <div class="descriptionMedicine" >
+                <div th:text="${medicine.getActiveSubstance()}"></div>
+                <div th:text="${medicine.getMedicineStrength()}"></div>
+                <div th:text="${medicine.getPharmaceuticalForm()}"></div>
+            </div>
+        </div>
+    </div>
+    <div class="descriptionPackages" th:each="some : ${big}">
+        <div class="packDesc" th:text="${some.codeEAN}"></div>
+        <div class="packDesc" th:text="${some.packageContent}"></div>
+        <div class="packDesc" th:text="${some.pathToDescription}"></div>
+
+        <div class="accordion-button">
+            <button th:onclick="'document.getElementById(\'formAdd'+ ${some.packageId} + '\').submit(); return false;'">
+                addd</button>
+            <form th:id="'formAdd'+ ${some.packageId}"
+                  th:action="@{/addMedicine(packageId=${some.packageId}, medicineId=${some.medicineId.getMedicineId()})}" method="POST">
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container ">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>AidKit</h5>
+                <p> Something about AidKit</p>
+            </div>
+            <div class="col-md-4">
+
+            </div>
+            <div class=" col-md-4">
+                <h5>Contact with Us</h5>
+                <ul class="contacts">
+                    <li><a href="tel://61280932400">Phone: + 123 45 678 9009</a></li>
+                    <li><a href="mailto:info.aidkit@gmail.com">Email: info.aidkit@gmail.com</a></li>
+                </ul>
+            </div>
+
+            <hr>
+            <div class="row">
+                <div class="col-md-8">
+                    <ul id="additional_links">
+                        <li><a href="index.html#0">Terms and conditions</a></li>
+                        <li><a href="index.html#0">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <div id="copy">© 2020 AidKit</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+<script src="js/scripts.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+</body>
+</html>
