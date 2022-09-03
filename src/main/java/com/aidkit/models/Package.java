@@ -11,14 +11,13 @@ public class Package {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int packageId;
 
-
-
     private String codeEAN;
     private String packageContent;
     private String pathToDescription;
     @ManyToOne
     @JoinColumn(name = "medicineId", referencedColumnName = "medicineId")
     private Medicine medicineId;
+
     public int getPackageId() {
         return packageId;
     }

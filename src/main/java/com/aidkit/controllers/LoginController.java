@@ -46,6 +46,7 @@ public class LoginController {
         model.addAttribute("registerUserModel", new RegisterUser());
         return "mainPage";
     }
+
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchTemplate(Model model) {
         List<Medicine> list = medicineService.getMedicineListFromDB();
@@ -68,7 +69,7 @@ public class LoginController {
         return "aboutMedicine";
     }
 
-    /*Authentication of user's email and password*/
+    /* Authentication of user's email and password */
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public String authenticateUser(@ModelAttribute("userModel") User user, Model model) {
         boolean authResult = this.authenticationService.authenticateUser(user);
@@ -83,19 +84,19 @@ public class LoginController {
             sessionObject.setId(userLogging.getUserId());
 
             List<Aidkit> aidkitList = memberShipService.getAidKitIdbyUserId(sessionObject.getId());
-            if(aidkitList.isEmpty()){
+            if (aidkitList.isEmpty()) {
                 return "startPage";
-            }else {
+            } else {
                 return "logged";
             }
-                 } else {
+        } else {
             model.addAttribute("errorMessage", "Zle wpisane login lub hasło");
             model.addAttribute("userModel", new User());
             return "redirect:mainPage";
         }
     }
-        //// search by code Ean substans and ??
-        // sort aidkit
-        //  history
+    //// search by code Ean substans and ??
+    // sort aidkit
+    // history
 
 }

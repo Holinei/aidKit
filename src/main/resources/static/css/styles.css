@@ -10,7 +10,7 @@ body{
 }
 
 .navbar{
-    background-color: #FF914C;
+    background-color: #FFCEB0 !important;
 }
 
 .aboutText {
@@ -302,4 +302,10 @@ body {
 
 .packDesc{
     padding: 20px;
+}
+
+.listOfAidKit{
+    height: 600px;
+    margin-top: 150px;
+    background-color: antiquewhite;
 }

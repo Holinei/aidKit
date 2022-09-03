@@ -31,7 +31,8 @@ public class MainController {
 
     @Resource(name = "sessionObject")
     SessionObject sessionObject;
-    @RequestMapping(value={"", "/", "/aidkit"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = { "", "/", "/aidkit" }, method = RequestMethod.GET)
     public String showMainPage(Model model) {
         model.addAttribute("userModel", new User());
         model.addAttribute("errorMessage", "");
@@ -40,9 +41,9 @@ public class MainController {
         return "mainPage";
     }
 
-    @RequestMapping(value={"/showMyAidKit"}, method = RequestMethod.GET)
+    @RequestMapping(value = { "/showMyAidKit" }, method = RequestMethod.GET)
     public String myAidKit(Model model) {
-        List<Aidkit>  aidkitList = memberShipService.getAidKitIdbyUserId(sessionObject.getId());
+        List<Aidkit> aidkitList = memberShipService.getAidKitIdbyUserId(sessionObject.getId());
         model.addAttribute("listMedicine", aidkitList);
         return "aboutAidKit";
     }

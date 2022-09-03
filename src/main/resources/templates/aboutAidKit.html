@@ -35,7 +35,7 @@
     </div>
 </nav>
 
-<div class="container about my-5">
+<div class="container listOfAidKit">
     <div  th:each="list : ${listMedicine}">
         <a th:href="@{/showAidKit(id=${list.aidkitId})}" th:text="${list.nameAidKit}"></a>
     </div>
