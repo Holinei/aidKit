@@ -95,8 +95,4 @@ public class LoginController {
             return "redirect:mainPage";
         }
     }
-    //// search by code Ean substans and ??
-    // sort aidkit
-    // history
-
 }
