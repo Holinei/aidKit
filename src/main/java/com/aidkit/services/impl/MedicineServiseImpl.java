@@ -27,7 +27,7 @@ public class MedicineServiseImpl implements IMedicineService {
     }
 
     @Override
-    public List<Package> getpackagebyId(int id) {
-        return this.medicineDAO.getpackagebyId(id);
+    public List<Package> getPackageListById(int id) {
+        return this.medicineDAO.getPackageListById(id);
     }
 }

@@ -32,13 +32,14 @@ public class LoginController {
     @Resource(name = "sessionObject")
     SessionObject sessionObject;
 
+    // Open login page 
     @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
     public String showLoginPage(Model model) {
         model.addAttribute("userModel", new User());
-        model.addAttribute("errorMessage", "");
         return "loginPage";
     }
 
+    // Logout user  
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(Model model) {
         sessionObject.setLogged(false);
@@ -46,7 +47,7 @@ public class LoginController {
         model.addAttribute("registerUserModel", new RegisterUser());
         return "mainPage";
     }
-
+    // Open search page 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchTemplate(Model model) {
         List<Medicine> list = medicineService.getMedicineListFromDB();
@@ -54,13 +55,14 @@ public class LoginController {
         return "searchPage";
     }
 
+    // Open page about medicine need to move functionality to search page
     @RequestMapping(value = "/aboutMedicine", method = RequestMethod.POST)
     public String postCourseDetail(@RequestParam(name = "id", required = false) int id, Model model) {
         List<Medicine> list = medicineService.getMedicineListFromDB();
         model.addAttribute("medicineList", list);
         List<AidKitMedicine> list2 = aidKitMedicineService.getAidMedicineList(id);
         model.addAttribute("aidList", list2);
-        List<Package> list3 = medicineService.getpackagebyId(id);
+        List<Package> list3 = medicineService.getPackageListById(id);
         model.addAttribute("big", list3);
         List<Medicine> medicineList = medicineService.getMedicineListFromDB();
         model.addAttribute("medicineList", medicineList);
@@ -73,7 +75,6 @@ public class LoginController {
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public String authenticateUser(@ModelAttribute("userModel") User user, Model model) {
         boolean authResult = this.authenticationService.authenticateUser(user);
-        int authRoleResult = this.authenticationService.authenticateRole(user);
         if (user.getEmail().isEmpty() || user.getPassword().isEmpty()) {
             model.addAttribute("userModel", new User());
             return "redirect:mainPage";

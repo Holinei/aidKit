@@ -37,12 +37,50 @@
         </div>
     </nav>
 
+<div class="container listOfAidKit">
+    <div class="dropdownSort">
+        <button onfocus="myFunction()" class="dropbtnSort" id="sortDropBox">Sort By</button>
+        <div id="myDropdownSort" class="dropdown-contentSort" aria-labelledby="sortDropBox">
+            
+          <a  th:onclick="'document.getElementById(\'sortNameForm' + '\').submit(); return false;'" class="btn_1 buttonView rounded add_top_30">Name A-Z</a>
+          <a  th:onclick="'document.getElementById(\'sortNameForm' + '\').submit(); return false;'" class="btn_1 buttonView rounded add_top_30">Name Z-A</a>
+          <a  th:onclick="'document.getElementById(\'sortForm' + '\').submit(); return false;'" class="btn_1 buttonView rounded add_top_30">By amount</a>
+          <a  th:onclick="'document.getElementById(\'sortForm' + '\').submit(); return false;'" class="btn_1 buttonView rounded add_top_30">By amount -</a>
+          <a  th:onclick="'document.getElementById(\'sortDateForm' + '\').submit(); return false;'" class="btn_1 buttonView rounded add_top_30">by date</a>
+          <a  th:onclick="'document.getElementById(\'sortDateForm' + '\').submit(); return false;'" class="btn_1 buttonView rounded add_top_30">by date -</a>
+          
+        </div>
+    </div>
+    <div class="visually-hidden">   
+        <form th:action="@{/sort}" method="post" id="sortForm">
+            <input type="hidden" name="id" id="id" th:value="${aidkitId}">
+            <button type="submit">Take</button>
+         </form>
+         <form th:action="@{/sortname}" method="post" id="sortNameForm">
+            <input type="hidden" name="id" id="id" th:value="${aidkitId}">
+            <button type="submit">Take</button>
+         </form>
+         <form th:action="@{/sortdate}" method="post" id="sortDateForm">
+            <input type="hidden" name="id" id="id" th:value="${aidkitId}">
+            <button type="submit">Take</button>
+         </form>
+    </div>
     <div class="container" th:each="list : ${course}">
         <div th:text="${list.getAidKitMedicineId()}"></div>
         <div th:text="${list.getAmountOfMedicine()}"></div>
         <div th:text="${list.packageId.getPackageContent()}"></div>
         <div th:text="${list.medicineId.getActiveSubstance()}"></div>
+        <a th:href="@{/removeMedicine(id=${aidkitId},aidKitMedicineId=${list.getAidKitMedicineId()})}" ><button class="accordion-button"> Remove </button></a>
+        <form th:action="@{/useMedicine}" method="post">
+            <input type="hidden" name="id" id="id" th:value="${aidkitId}">
+            <input type="hidden" name="aidKitMedicineId" id="aidKitMedicineId" th:value="${list.getAidKitMedicineId()}">
+            <input type="number" min="0" name="amount" th:max = "${list.getAmountOfMedicine()}" />
+        
+            <button type="submit">Take</button>
+         </form>
+         
     </div>
+</div>
     <footer>
         <div class="container ">
             <div class="row">

@@ -39,7 +39,7 @@ public class MedicineDAOImpl implements IMedicineDAO {
     }
 
     @Override
-    public List<Package> getpackagebyId(int id) {
+    public List<Package> getPackageListById(int id) {
         Session session = this.sessionFactory.openSession();
         List<Package> packageList2 = (List<Package>) session
                 .createQuery("FROM Package WHERE medicineId = '" + id + "'")

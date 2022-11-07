@@ -23,6 +23,15 @@ public class AidKitMedicine {
     private Package packageId;
     private int amountOfMedicine;
     private Date expirationDate;
+    private int amountToUse;
+
+    public int getAmountToUse() {
+        return this.amountToUse;
+    }
+
+    public void setAmountToUse(int amountToUse) {
+        this.amountToUse = amountToUse;
+    }
 
     public int getAidKitMedicineId() {
         return aidKitMedicineId;

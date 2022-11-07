@@ -24,7 +24,7 @@ public class RegisterController {
     @Resource(name = "sessionObject")
     SessionObject sessionObject;
 
-
+    // Register new user to system 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerUser(@ModelAttribute RegisterUser registerUser, Model model) throws InterruptedException {
 

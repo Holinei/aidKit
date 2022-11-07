@@ -27,7 +27,16 @@ public class AidKitMedicineServiceImpl implements IAidKitMedicineService {
     }
 
     @Override
-    public void removeMedicine(AidKitMedicine aidKitMedicine, int medicineId) {
-        aidKitMedicineDAO.removeMedicine(aidKitMedicine, medicineId);
+    public void removeMedicine(int aidKitMedicine) {
+        aidKitMedicineDAO.removeMedicine(aidKitMedicine);
+    }
+    
+    @Override
+    public void useMedicine(int aidKitMedicineId, int newAmount) {
+        aidKitMedicineDAO.useMedicine(aidKitMedicineId, newAmount);
+    }
+    @Override
+    public AidKitMedicine getAidKitMedicine(int aidKitMedicineId) {
+        return aidKitMedicineDAO.getAidMedicine(aidKitMedicineId);
     }
 }

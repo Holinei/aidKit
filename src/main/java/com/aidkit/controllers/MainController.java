@@ -1,6 +1,7 @@
 package com.aidkit.controllers;
 
 import com.aidkit.SessionObject;
+import com.aidkit.models.AidKitMedicine;
 import com.aidkit.models.Aidkit;
 import com.aidkit.models.RegisterUser;
 import com.aidkit.models.User;
@@ -32,6 +33,7 @@ public class MainController {
     @Resource(name = "sessionObject")
     SessionObject sessionObject;
 
+    // paths to entry to main page
     @RequestMapping(value = { "", "/", "/aidkit" }, method = RequestMethod.GET)
     public String showMainPage(Model model) {
         model.addAttribute("userModel", new User());
@@ -41,6 +43,7 @@ public class MainController {
         return "mainPage";
     }
 
+    // Open My AidKit
     @RequestMapping(value = { "/showMyAidKit" }, method = RequestMethod.GET)
     public String myAidKit(Model model) {
         List<Aidkit> aidkitList = memberShipService.getAidKitIdbyUserId(sessionObject.getId());
@@ -48,11 +51,13 @@ public class MainController {
         return "aboutAidKit";
     }
 
+    // Open AidKit detail need to move functionality to about AidKit
     @RequestMapping(value = "/showAidKit", method = RequestMethod.GET)
     public String showAidkit(@RequestParam(name = "id", required = false) int aidkitid, Model model, User user) {
 
         model.addAttribute("course", aidKitMedicineService.getAidMedicineList(aidkitid));
-
+        model.addAttribute("aidkitId", aidkitid);
+        model.addAttribute("value2");
         return "aidkit-detail";
     }
 }

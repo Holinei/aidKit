@@ -10,5 +10,7 @@ import java.util.List;
 public interface IAidKitMedicineDAO {
     List<AidKitMedicine> getAidMedicineList(int aidkitId);
     void addMedicineToAidKit(AidKitMedicine aidKitMedicine, Medicine medicine, Package packageId, Aidkit aidkit);
-    void removeMedicine(AidKitMedicine aidKitMedicine, int medicineId);
+    void removeMedicine(int aidKitMedicineId);
+    void useMedicine(int aidKitMedicineId, int newAmount);
+    AidKitMedicine getAidMedicine(int aidKitMedicineId);
 }

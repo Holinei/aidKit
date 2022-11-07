@@ -24,7 +24,6 @@ public class Medicine {
         this.medicineId = medicineId;
     }
 
-
     public String getMedicineName() {
         return medicineName;
     }
@@ -32,7 +31,6 @@ public class Medicine {
     public void setMedicineName(String medicineName) {
         this.medicineName = medicineName;
     }
-
 
     public String getMedicineStrength() {
         return medicineStrength;
@@ -57,8 +55,6 @@ public class Medicine {
     public void setPharmaceuticalForm(String pharmaceuticalForm) {
         this.pharmaceuticalForm = pharmaceuticalForm;
     }
-
-
 
     @Override
     public String toString() {
